@@ -49,42 +49,28 @@ session_start();
  	}
 
  
- }elseif(isset($_POST['thanhtoan'])){
- 	$name = $_POST['name'];
- 	$phone = $_POST['phone'];
- 	$email = $_POST['email'];
- 	$password = md5($_POST['password']);
- 	$note = $_POST['note'];
- 	$address = $_POST['address'];
- 	$giaohang = $_POST['giaohang'];
  
- 	$sql_khachhang = mysqli_query($con,"INSERT INTO tbl_khachhang(name,phone,email,address,note,giaohang,password) values ('$name','$phone','$email','$address','$note','$giaohang','$password')");
- 	if($sql_khachhang){
- 		$sql_select_khachhang = mysqli_query($con,"SELECT * FROM tbl_khachhang ORDER BY khachhang_id DESC LIMIT 1");
- 		$mahang = rand(0,9999);
- 		$row_khachhang = mysqli_fetch_array($sql_select_khachhang);
- 		$khachhang_id = $row_khachhang['khachhang_id'];
- 		$_SESSION['dangnhap_home'] = $row_khachhang['name'];
- 		$_SESSION['khachhang_id'] = $khachhang_id;
- 		for($i=0;$i<count($_POST['thanhtoan_product_id']);$i++){
-	 		$sanpham_id = $_POST['thanhtoan_product_id'][$i];
-	 		$soluong = $_POST['thanhtoan_soluong'][$i];
-	 		$sql_donhang = mysqli_query($con,"INSERT INTO tbl_donhang(sanpham_id,khachhang_id,soluong,mahang) values ('$sanpham_id','$khachhang_id','$soluong','$mahang')");
-	 		$sql_giaodich = mysqli_query($con,"INSERT INTO tbl_giaodich(sanpham_id,soluong,magiaodich,khachhang_id) values ('$sanpham_id','$soluong','$mahang','$khachhang_id')");
-	 		$sql_delete_thanhtoan = mysqli_query($con,"DELETE FROM tbl_giohang WHERE sanpham_id='$sanpham_id'");
- 		}
-
- 	}
  }elseif(isset($_POST['thanhtoandangnhap'])){
+  $madonhang = rand(0,9999);	
+ 	$emailkhachhang = $_SESSION['email'];
+  $tenngnhan= $_POST['name'];
+  $diachingnhan = $_POST['address'];
+  $dtngnhan= $_POST['phone'];
+  $sql_lay_giohang = $db->exeQuery("SELECT * FROM giohang ORDER BY idgiohang DESC");
+	$i = 0;
+	$total = 0;
+	foreach($sql_lay_giohang as $row_fetch_giohang){ 
 
- 	$khachhang_id = $_SESSION['khachhang_id'];
- 	$mahang = rand(0,9999);	
- 	for($i=0;$i<count($_POST['thanhtoan_product_id']);$i++){
-	 		$sanpham_id = $_POST['thanhtoan_product_id'][$i];
-	 		$soluong = $_POST['thanhtoan_soluong'][$i];
-	 		$sql_donhang = mysqli_query($con,"INSERT INTO tbl_donhang(sanpham_id,khachhang_id,soluong,mahang) values ('$sanpham_id','$khachhang_id','$soluong','$mahang')");
-	 		$sql_giaodich = mysqli_query($con,"INSERT INTO tbl_giaodich(sanpham_id,soluong,magiaodich,khachhang_id) values ('$sanpham_id','$soluong','$mahang','$khachhang_id')");
-	 		$sql_delete_thanhtoan = mysqli_query($con,"DELETE FROM tbl_giohang WHERE sanpham_id='$sanpham_id'");
+		$subtotal = $row_fetch_giohang['soluong'] * $row_fetch_giohang['giadienthoai'];
+		$total+=$subtotal;
+		$i++;}
+  $tongtien= $total;
+ 	for($i=0;$i<count($_POST['madthoai']);$i++){
+	 		$sanpham_id = $_POST['madthoai'][$i];
+	 		$soluong = $_POST['soluong'][$i];
+	 		$sql_donhang = $db->exeQuery("INSERT INTO donhang(maDon,email,tenngnhan,diachinhan,dtnguoinhan,tongtien) values ('$madonhang','$emailkhachhang','$tenngnhan','$diachingnhan','$dtngnhan','$tongtien')");
+	 		$sql_chitietdonhang = $db->exeQuery("INSERT INTO chitietdonhang(maDon,madt,soluong) values ('$madonhang','$sanpham_id','$soluong')");
+	 		$sql_delete_giohang = $db->exeQuery("DELETE FROM giohang WHERE madt='$sanpham_id'");
  		}
 
  	
@@ -202,12 +188,13 @@ session_start();
       </div>
       <div class="dnkh">
       <?php 
+      
        if (isset($_SESSION['email']) && $_SESSION['email']){
            echo 'Xin chào: '.$_SESSION['email'].'</br>';
            echo '<a href="logout.php">Logout</a>';
        }
        else{
-           echo 'Bạn chưa đăng nhập';
+           echo 'Bạn cần đăng nhập để thanh toán';
        }
        ?>
       </div>
@@ -287,16 +274,42 @@ foreach($dienthoais as $dienthoai)
     <td colspan="2" class="hidden-xs"> </td>
     <td class="hidden-xs text-center">
       <strong>Tổng tiền: <?php echo number_format($total); ?></strong>
-    </td> 
-    <td><a href="" class="btn btn-danger btn-block">Thanh toán</a></td>
+    </td>
+  
    </tr> 
   
-  </tfoot> 
-  
-
+  </tfoot>
  </table>
+ <?php
+			if(isset($_SESSION['email'])){ 
+?>
+ <div class="first-row">
+		<div class="controls form-group">
+			<input class="billing-address-name form-control" type="text" name="name" placeholder="Điền tên người nhận..." required="">
+		</div>
+		<div class="w3_agileits_card_number_grids">
+				<div class="w3_agileits_card_number_grid_left form-group">
+						<div class="controls">
+							<input type="text" class="form-control" placeholder="Số điện thoại người nhận..." name="phone" required="">
+						</div>
+				</div>
+				<div class="w3_agileits_card_number_grid_right form-group">
+						<div class="controls">
+								<input type="text" class="form-control" placeholder="Địa chỉ người nhận..." name="address" required="">
+						</div>
+				</div>
+		</div>					
+		<div class="controls form-group">
+				<textarea style="resize: none;" class="form-control" placeholder="Ghi chú..." name="note" required=""></textarea>  
+		</div>
+    <input type="submit" name="thanhtoandangnhap" class="btn btn-danger" style="width: 20%" value="Thanh toán">
+								
+	</div>
+<?php } ?>
  </form>
 </div>
+
+
 
   <!-- end shop section -->
 

@@ -95,7 +95,7 @@
               <a href="dangnhap.php">
                 <i class="fa fa-user" aria-hidden="true"></i>
               </a>
-              <a href="">
+              <a href="giohang.php">
                 <i class="fa fa-cart-plus" aria-hidden="true"></i>
               </a>
               

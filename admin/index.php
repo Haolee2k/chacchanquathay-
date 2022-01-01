@@ -2,6 +2,7 @@
 <html>
 <head>
 <title>H&N Admin</title>
+<link rel="shortcut icon" href="../images/crowns.png" type="image/x-icon">
 <meta http-equiv="content-type" content="text/html; charset=iso-8859-1" />
 <style media="all" type="text/css">
 @import "css/all.css";
@@ -22,8 +23,8 @@ include_once("../classes/Db.class.php");
     <ul id="top-navigation">
       <li><span><span><a href="index.php?mo=loai">Quản lý loại</a></span></span></li>
       <li><span><span><a href="index.php?mo=dt">Quản lý điện thoại </a></span></span></li>
-      <li><span><span><a href="#">Quản lý đơn hàng</a></span></span></li>
-      
+      <li><span><span><a href="index.php?mo=dhc">Quản lý đơn hàng chờ</a></span></span></li>
+      <li><span><span><a href="index.php?mo=dhd">Quản lý đơn hàng được duyệt</a></span></span></li>
       
     </ul>
   </div>
@@ -36,14 +37,23 @@ include_once("../classes/Db.class.php");
 	  if(isset($_REQUEST['mo']))
 	  	$mo=$_REQUEST['mo'];
       else
-        $mo="loai";
+        $mo="dangnhap";
 		switch($mo){
+      case "dangnhap":
+				include "dangnhap.php";
+				break;
 			case "loai":
 				include "loai.php";
 				break;
       case "dt":
         include "dienthoai.php";
         break;
+      case "dhc":
+        include "donhangcho.php";
+        break;
+      case "dhd":
+          include "donhangduyet.php";
+          break;
 					
 		};
 	  
