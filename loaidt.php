@@ -61,6 +61,11 @@ $bd=($page-1)*DT_1_TRANG;
   <link href="css/responsive.css" rel="stylesheet" />
 
 </head>
+<style>
+  .dnkh {
+    text-align: right;
+  }
+</style>
 
 <body class="sub_page">
 
@@ -105,13 +110,24 @@ $bd=($page-1)*DT_1_TRANG;
               <a href="dangnhap.php">
                 <i class="fa fa-user" aria-hidden="true"></i>
               </a>
-              <a href="">
+              <a href="giohang.php">
                 <i class="fa fa-cart-plus" aria-hidden="true"></i>
               </a>
               
             </div>
           </div>
         </nav>
+      </div>
+      <div class="dnkh">
+      <?php 
+       if (isset($_SESSION['email']) && $_SESSION['email']){
+           echo 'Xin chào: '.$_SESSION['email'].'</br>';
+           echo '<a href="logout.php">Logout</a>';
+       }
+       else{
+           echo 'Bạn chưa đăng nhập';
+       }
+       ?>
       </div>
     </header>
 
@@ -147,6 +163,7 @@ $bd=($page-1)*DT_1_TRANG;
       
       </div>
     </div>
+    
   </section>
 
 
@@ -256,10 +273,10 @@ foreach($dienthoais as $dienthoai)
         <div class="col-md-6 col-lg-3 footer-col">
           <div class="footer_detail">
             <h4>
-              About
+              H&N
             </h4>
             <p>
-              Necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with
+              Mang lại những trải nghiệm tốt nhất cho người dùng
             </p>
             <div class="footer_social">
               <a href="">
@@ -280,7 +297,7 @@ foreach($dienthoais as $dienthoai)
         <div class="col-md-6 col-lg-3 footer-col">
           <div class="footer_contact">
             <h4>
-              Reach at..
+              Tìm đến...
             </h4>
             <div class="contact_link_box">
               <a href="">
@@ -292,13 +309,13 @@ foreach($dienthoais as $dienthoai)
               <a href="">
                 <i class="fa fa-phone" aria-hidden="true"></i>
                 <span>
-                  Call +01 1234567890
+                  Call +0898445228
                 </span>
               </a>
               <a href="">
                 <i class="fa fa-envelope" aria-hidden="true"></i>
                 <span>
-                  demo@gmail.com
+                  lahao11062000@gmail.com
                 </span>
               </a>
             </div>
@@ -327,8 +344,8 @@ foreach($dienthoais as $dienthoai)
       </div>
       <div class="footer-info">
         <p>
-          &copy; <span id="displayYear"></span> All Rights Reserved By
-          <a href="https://html.design/">Free Html Templates</a>
+          &copy; <span id="displayYear"></span> Đồ án chuyên ngành được thực hiện bởi
+          <a href="https://html.design/">Lê Anh Hào x Phạm Hoàng Nam</a>
         </p>
       </div>
     </div>

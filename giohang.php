@@ -280,7 +280,12 @@ foreach($dienthoais as $dienthoai)
   
   </tfoot>
  </table>
- <?php
+
+ </form>
+</div>
+<form action="" method='POST'>
+  <table>
+  <?php
 			if(isset($_SESSION['email'])){ 
 ?>
  <div class="first-row">
@@ -298,16 +303,23 @@ foreach($dienthoais as $dienthoai)
 								<input type="text" class="form-control" placeholder="Địa chỉ người nhận..." name="address" required="">
 						</div>
 				</div>
-		</div>					
-		<div class="controls form-group">
+		</div>	
+    <?php
+      $sql=$db->exeQuery("select * from giohang");
+      foreach($sql as $dh){
+    ?>
+    <input class="form-control text-center" value="<?php echo $dienthoai['soluong'] ?>" type="hidden" min="0" max="100" name="soluong[]">
+    <input type="hidden" name="madthoai[]" value="<?php echo $dienthoai['madt'] ?>">				
+		<?php } ?>
+    <div class="controls form-group">
 				<textarea style="resize: none;" class="form-control" placeholder="Ghi chú..." name="note" required=""></textarea>  
 		</div>
     <input type="submit" name="thanhtoandangnhap" class="btn btn-danger" style="width: 20%" value="Thanh toán">
 								
 	</div>
 <?php } ?>
- </form>
-</div>
+  </table>
+</form>
 
 
 
@@ -320,10 +332,10 @@ foreach($dienthoais as $dienthoai)
         <div class="col-md-6 col-lg-3 footer-col">
           <div class="footer_detail">
             <h4>
-              About
+              H&N
             </h4>
             <p>
-              Necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with
+              Mang lại những trải nghiệm tốt nhất cho người dùng
             </p>
             <div class="footer_social">
               <a href="">
@@ -344,7 +356,7 @@ foreach($dienthoais as $dienthoai)
         <div class="col-md-6 col-lg-3 footer-col">
           <div class="footer_contact">
             <h4>
-              Reach at..
+              Tìm đến...
             </h4>
             <div class="contact_link_box">
               <a href="">
@@ -356,13 +368,13 @@ foreach($dienthoais as $dienthoai)
               <a href="">
                 <i class="fa fa-phone" aria-hidden="true"></i>
                 <span>
-                  Call +01 1234567890
+                  Call +0898445228
                 </span>
               </a>
               <a href="">
                 <i class="fa fa-envelope" aria-hidden="true"></i>
                 <span>
-                  demo@gmail.com
+                  lahao11062000@gmail.com
                 </span>
               </a>
             </div>
@@ -391,8 +403,8 @@ foreach($dienthoais as $dienthoai)
       </div>
       <div class="footer-info">
         <p>
-          &copy; <span id="displayYear"></span> All Rights Reserved By
-          <a href="https://html.design/">Free Html Templates</a>
+          &copy; <span id="displayYear"></span> Đồ án chuyên ngành được thực hiện bởi
+          <a href="https://html.design/">Lê Anh Hào x Phạm Hoàng Nam</a>
         </p>
       </div>
     </div>

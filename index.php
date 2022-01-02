@@ -95,6 +95,13 @@
               <li class="nav-item">
                 <a class="nav-link" href="contact.html">Liên hệ</a>
               </li>
+              <?php 
+                if(isset($_SESSION['email'])){ 
+              ?>
+              <li class="nav-item">
+                <a class="nav-link" href="xemdonhang.php">Xem đơn hàng</a>
+              </li>
+              <?php } ?>
             </ul>
             <div class="user_option-box">
               <input  type="text" name="searchtitle" placeholder="Tìm kiếm..." required>
@@ -136,10 +143,10 @@
                 <div class="col-md-6">
                   <div class="detail-box">
                     <h1>
-                      Smart Watches
+                      Apple
                     </h1>
                     <p>
-                      Aenean scelerisque felis ut orci condimentum laoreet. Integer nisi nisl, convallis et augue sit amet, lobortis semper quam.
+                      Hãy suy nghĩ khác biệt
                     </p>
                     <div class="btn-box">
                       <a href="loaidt.php?catdt=ip" class="btn1">
@@ -162,10 +169,10 @@
                 <div class="col-md-6">
                   <div class="detail-box">
                     <h1>
-                      Smart Watches
+                      Samsung
                     </h1>
                     <p>
-                      Aenean scelerisque felis ut orci condimentum laoreet. Integer nisi nisl, convallis et augue sit amet, lobortis semper quam.
+                      Hãy tưởng tượng những điều tuyệt vời mà chúng ta có thể thực hiện
                     </p>
                     <div class="btn-box">
                       <a href="loaidt.php?catdt=ss" class="btn1">
@@ -188,10 +195,10 @@
                 <div class="col-md-6">
                   <div class="detail-box">
                     <h1>
-                      Smart Watches
+                      Oppo
                     </h1>
                     <p>
-                      Aenean scelerisque felis ut orci condimentum laoreet. Integer nisi nisl, convallis et augue sit amet, lobortis semper quam.
+                      Mẫu mã sang trọng tạo nên đẳng cấp người dùng
                     </p>
                     <div class="btn-box">
                       <a href="loaidt.php?catdt=op" class="btn1">
@@ -202,7 +209,7 @@
                 </div>
                 <div class="col-md-6">
                   <div class="img-box">
-                    <img src="images/slide/slidess.png" alt="">
+                    <img src="images/slide/slideoppo.jpg" alt="">
                   </div>
                 </div>
               </div>
@@ -475,10 +482,10 @@ foreach($dienthoais as $dienthoai)
         <div class="col-md-6 col-lg-3 footer-col">
           <div class="footer_detail">
             <h4>
-              About
+              H&N
             </h4>
             <p>
-              Necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with
+              Mang lại những trải nghiệm tốt nhất cho người dùng
             </p>
             <div class="footer_social">
               <a href="">
@@ -499,7 +506,7 @@ foreach($dienthoais as $dienthoai)
         <div class="col-md-6 col-lg-3 footer-col">
           <div class="footer_contact">
             <h4>
-              Reach at..
+              Tìm đến...
             </h4>
             <div class="contact_link_box">
               <a href="">
@@ -511,13 +518,13 @@ foreach($dienthoais as $dienthoai)
               <a href="">
                 <i class="fa fa-phone" aria-hidden="true"></i>
                 <span>
-                  Call +01 1234567890
+                  Call +0898445228
                 </span>
               </a>
               <a href="">
                 <i class="fa fa-envelope" aria-hidden="true"></i>
                 <span>
-                  demo@gmail.com
+                  lahao11062000@gmail.com
                 </span>
               </a>
             </div>
@@ -546,8 +553,8 @@ foreach($dienthoais as $dienthoai)
       </div>
       <div class="footer-info">
         <p>
-          &copy; <span id="displayYear"></span> All Rights Reserved By
-          <a href="https://html.design/">Free Html Templates</a>
+          &copy; <span id="displayYear"></span> Đồ án chuyên ngành được thực hiện bởi
+          <a href="https://html.design/">Lê Anh Hào x Phạm Hoàng Nam</a>
         </p>
       </div>
     </div>
